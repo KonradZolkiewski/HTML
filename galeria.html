@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <title>Galeria</title>
+</head>
+<body class="gallery-body">
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const images = document.querySelectorAll('.gallery-container img');
+            const enlargedImage = document.getElementById('enlargedImage');
+            const prevButton = document.getElementById('prev');
+            const nextButton = document.getElementById('next');
+            let currentIndex = 0;
+
+            function showImage(index) {
+                enlargedImage.src = images[index].src;
+                currentIndex = index;
+            }
+
+            images.forEach((img, index) => {
+                img.addEventListener('click', () => {
+                    showImage(index);
+                });
+            });
+
+            prevButton.addEventListener('click', () => {
+                currentIndex = (currentIndex > 0) ? currentIndex - 1 : images.length - 1;
+                showImage(currentIndex);
+            });
+
+            nextButton.addEventListener('click', () => {
+                currentIndex = (currentIndex < images.length - 1) ? currentIndex + 1 : 0;
+                showImage(currentIndex);
+            });
+
+            showImage(currentIndex);
+        });
+    </script>
+    <header id="Galeria_header">
+        <h1>Galeria</h1>
+        <h5>Użyj przycisków aby nawigować pomiędzy zdjęcia</h5>
+    </header>
+    <section id="gallery">
+        <div class="enlarged-container">
+            <div class="button-container" style="display: flex; justify-content: center;">
+                <button id="prev" class="gallery-button">Poprzedni</button>
+                <button id="next" class="gallery-button">Następny</button>
+            </div>
+            <img id="enlargedImage" class="centered-photo" src="media/photo1.jpg" alt="Enlarged Image">
+        </div>
+        <div class="gallery-container">
+            <img src="media/photo1.jpg" alt="Photo 1" class="thumbnail">
+            <img src="media/photo2.jpg" alt="Photo 2" class="thumbnail">
+            <img src="media/photo3.jpg" alt="Photo 3" class="thumbnail">
+            <img src="media/photo4.jpg" alt="Photo 4" class="thumbnail">
+            <img src="media/photo5.jpg" alt="Photo 5" class="thumbnail">
+            <img src="media/photo6.jpg" alt="Photo 6" class="thumbnail">
+            <img src="media/photo7.jpg" alt="Photo 7" class="thumbnail">
+        </div>
+    </section>
+</body>
+</html>
